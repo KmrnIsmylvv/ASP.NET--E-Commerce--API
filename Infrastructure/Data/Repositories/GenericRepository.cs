@@ -30,7 +30,7 @@ namespace Infrastructure.Data.Repositories
         public T GetEntityWithSpecs(ISpecification<T> spec)
         {
             return ApplySpecification(spec).FirstOrDefault();
-        }
+        } 
 
         public async Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec)
         {
