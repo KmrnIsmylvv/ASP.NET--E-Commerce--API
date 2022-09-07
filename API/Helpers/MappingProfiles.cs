@@ -1,6 +1,7 @@
 ﻿using API.DTOs;
 using AutoMapper;
 using Core.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace API.Helpers
 {
@@ -8,7 +9,11 @@ namespace API.Helpers
     {
         public MappingProfiles()
         {
-            CreateMap<Product, ProductToReturnDto>();
+            CreateMap<Product, ProductToReturnDto>()
+                .ForMember(dest => dest.ProductBrand, opt =>
+                    opt.MapFrom(src => src.ProductBrand.Name))
+                .ForMember(dest => dest.ProductType, opt =>
+                    opt.MapFrom(src => src.ProductType.Name));
         }
     }
 }
