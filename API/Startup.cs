@@ -1,6 +1,6 @@
-using System;
 using System.Linq;
 using API.Errors;
+using API.Extensions;
 using API.Helpers;
 using API.Middleware;
 using Core.Interfaces;
@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace API
@@ -29,34 +28,12 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
             services.AddAutoMapper(typeof(MappingProfiles));
 
             services.AddControllers();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"}); });
 
-            services.AddDbContext<StoreContext>(opt =>
-                opt.UseSqlite(_config.GetConnectionString("DefaultConnection")));
-
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.InvalidModelStateResponseFactory = actionContext =>
-                {
-                    string[] errors = actionContext.ModelState
-                        .Where(e => e.Value.Errors.Count > 0)
-                        .SelectMany(x => x.Value.Errors)
-                        .Select(x => x.ErrorMessage).ToArray();
-
-                    ApiValidationErrorResponse errorResponse = new ApiValidationErrorResponse
-                    {
-                        Errors = errors
-                    };
-
-                    return new BadRequestObjectResult(errorResponse);
-                };
-            });
+            services.AddApplicationServices(_config);
+            services.AddSwaggerDocumentation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +48,8 @@ namespace API
             app.UseRouting();
 
             app.UseStaticFiles();
+
+            app.AddSwaggerUI();
 
             app.UseAuthorization();
 
