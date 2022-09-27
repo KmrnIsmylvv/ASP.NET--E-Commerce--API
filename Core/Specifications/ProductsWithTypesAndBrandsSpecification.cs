@@ -23,7 +23,6 @@ namespace Core.Specifications
                     default:
                         AddOrderBy(n=>n.Name);
                         break;
-                    
                 }
             }
         }
