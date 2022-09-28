@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-   
     public class ProductsController : BaseApiController
     {
         private readonly IGenericRepository<Product> _productsRepo;
@@ -31,9 +30,10 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string sort)
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string sort,
+            int? brandId, int? typeId)
         {
-            var spec = new ProductsWithTypesAndBrandsSpecification(sort);
+            var spec = new ProductsWithTypesAndBrandsSpecification(sort, brandId, typeId);
 
             IReadOnlyList<Product> products = await _productsRepo.ListAsync(spec);
 
