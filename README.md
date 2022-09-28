@@ -1,3 +1,10 @@
 # ASP.NET--E-Commerce--API
 
-> ASP.Net WebAPI && Angular 
+## Technologies 
+- Asp.Net Core Web API
+- Sqlite
+
+
+## Architecture && Pattern
+- N-Tier Architecture
+- Repository and Specification Pattern
