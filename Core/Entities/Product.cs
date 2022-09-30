@@ -1,4 +1,5 @@
-﻿using System.Security.Principal;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Security.Principal;
 
 namespace Core.Entities
 {
