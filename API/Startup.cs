@@ -58,8 +58,7 @@ namespace API
             app.UseCors("CorsPolicy");
 
             app.AddSwaggerUI();
-
-
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
