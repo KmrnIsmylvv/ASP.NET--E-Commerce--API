@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   products: IProduct[] = [];
 
   constructor(private http: HttpClient) {
+
   }
 
   ngOnInit(): void {
