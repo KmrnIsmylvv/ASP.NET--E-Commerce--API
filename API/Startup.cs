@@ -36,9 +36,6 @@ namespace API
             services.AddApplicationServices(_config);
             services.AddSwaggerDocumentation();
 
-            services.AddDbContext<StoreContext>(x =>
-            x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
-
             services.AddSingleton<ConnectionMultiplexer>(c =>
             {
                 var configuration = ConfigurationOptions.Parse(
