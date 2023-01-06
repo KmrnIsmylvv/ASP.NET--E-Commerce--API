@@ -43,7 +43,7 @@ namespace API
 
                 return ConnectionMultiplexer.Connect(configuration);
             });
-
+                
             services.AddCors(opt =>
             {
                 opt.AddPolicy("CorsPolicy",
