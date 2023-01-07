@@ -2,6 +2,7 @@
 using Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Threading.Tasks;
 
 namespace API.Controllers
