@@ -3,6 +3,7 @@ using API.Errors;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Data.Repositories;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,11 @@ namespace API.Extensions
 
             services.AddDbContext<StoreContext>(opt =>
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<AppIdentityDbContext>(opt =>
+            {
+                opt.UseSqlite(config.GetConnectionString("IdentityConnection"));
+            });
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
