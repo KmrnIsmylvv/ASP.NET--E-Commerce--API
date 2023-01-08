@@ -35,6 +35,7 @@ namespace API
 
             services.AddApplicationServices(_config);
             services.AddSwaggerDocumentation();
+            services.AddIdentityService();
 
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
