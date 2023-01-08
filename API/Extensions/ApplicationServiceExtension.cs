@@ -25,9 +25,7 @@ namespace API.Extensions
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<AppIdentityDbContext>(opt =>
-            {
-                opt.UseSqlite(config.GetConnectionString("IdentityConnection"));
-            });
+                opt.UseSqlite(config.GetConnectionString("IdentityConnection")));
 
             services.Configure<ApiBehaviorOptions>(options =>
             {

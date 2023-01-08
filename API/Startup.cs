@@ -36,8 +36,6 @@ namespace API
             services.AddApplicationServices(_config);
             services.AddSwaggerDocumentation();
 
-            services.AddScoped<IBasketRepository, BasketRepository>();
-
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
                 var configuration = ConfigurationOptions.Parse(
