@@ -3,6 +3,8 @@
 ## Technologies 
 - Asp.Net Core Web API
 - Sqlite
+- Redis
+- Docker
 
 
 ## Architecture && Pattern
