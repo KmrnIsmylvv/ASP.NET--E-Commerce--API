@@ -2,7 +2,6 @@
 using AutoMapper;
 using Core.Entities;
 using Core.Entities.Identity;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace API.Helpers
 {
@@ -17,7 +16,7 @@ namespace API.Helpers
                     opt.MapFrom(src => src.ProductType.Name))
                 .ForMember(dest => dest.PictureUrl, opt =>
                     opt.MapFrom<ProductUrlResolver>());
-            CreateMap<Address, AddressDto>();
+            CreateMap<Address, AddressDto>().ReverseMap();
         }
     }
 }
