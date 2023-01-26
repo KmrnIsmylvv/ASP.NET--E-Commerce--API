@@ -8,10 +8,8 @@ namespace Core.Entities
 {
     public class CustomerBasket
     {
-
         public CustomerBasket()
         {
-
         }
 
         public CustomerBasket(string id)
