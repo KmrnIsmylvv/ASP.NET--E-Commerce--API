@@ -2,6 +2,7 @@
 using AutoMapper;
 using Core.Entities;
 using Core.Entities.Identity;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Helpers
 {
@@ -19,6 +20,7 @@ namespace API.Helpers
             CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<CustomerBasketDto, CustomerBasket>();
             CreateMap<BasketItemDto, BasketItem>();
+            CreateMap<AddressDto, Core.Entities.OrderAggregate.Address>();
         }
     }
 }
