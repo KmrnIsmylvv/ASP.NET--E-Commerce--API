@@ -23,6 +23,7 @@ namespace API.Extensions
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddDbContext<StoreContext>(opt =>
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection")));

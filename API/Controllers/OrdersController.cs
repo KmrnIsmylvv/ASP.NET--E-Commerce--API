@@ -1,16 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using API.DTOs;
 using API.Errors;
 using API.Extensions;
 using AutoMapper;
-using Core.Entities.Identity;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StackExchange.Redis;
 using Address = Core.Entities.OrderAggregate.Address;
 using Order = Core.Entities.OrderAggregate.Order;
 
