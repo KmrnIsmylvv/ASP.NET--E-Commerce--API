@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using API.DTOs;
 using API.Errors;
 using API.Extensions;
 using AutoMapper;
+using Core.Entities.OrderAggregate;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,5 +37,33 @@ public class OrdersController : BaseApiController
         if (order is null) return BadRequest(new ApiResponse(400, "Problem creating order"));
 
         return Ok(order);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<Order>>> GetOrdersForUser()
+    {
+        var email = HttpContext.User.RetrieveEmailFromPrincipal();
+
+        var orders = await _orderService.GetOrdersForUserAsync(email);
+
+        return Ok(orders);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Order>> GetOrderByIdForUser(int id)
+    {
+        var email = HttpContext.User.RetrieveEmailFromPrincipal();
+
+        var order = await _orderService.GetOrderById(id, email);
+
+        if (order is null) return NotFound(new ApiResponse(404));
+
+        return Ok(order);
+    }
+
+    [HttpGet("deliveryMethods")]
+    public async Task<ActionResult<DeliveryMethod>> GetDeliveryMethods()
+    {
+        return Ok(await _orderService.GetDeliveryMethodsAsync());
     }
 }
