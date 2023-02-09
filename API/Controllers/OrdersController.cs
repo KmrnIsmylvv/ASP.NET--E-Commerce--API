@@ -26,7 +26,7 @@ public class OrdersController : BaseApiController
     }
 
     [HttpPost]
-    public async Task<ActionResult<Order>> CreateOrder(OrderDto orderDto)
+    public async Task<ActionResult<OrderDto>> CreateOrder(OrderDto orderDto)
     {
         var email = HttpContext.User.RetrieveEmailFromPrincipal();
 
@@ -40,17 +40,17 @@ public class OrdersController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IReadOnlyList<Order>>> GetOrdersForUser()
+    public async Task<ActionResult<IReadOnlyList<OrderReturnDto>>> GetOrdersForUser()
     {
         var email = HttpContext.User.RetrieveEmailFromPrincipal();
 
         var orders = await _orderService.GetOrdersForUserAsync(email);
 
-        return Ok(orders);
+        return Ok(_mapper.Map<IReadOnlyList<OrderReturnDto>>(orders));
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Order>> GetOrderByIdForUser(int id)
+    public async Task<ActionResult<OrderReturnDto>> GetOrderByIdForUser(int id)
     {
         var email = HttpContext.User.RetrieveEmailFromPrincipal();
 
@@ -58,7 +58,7 @@ public class OrdersController : BaseApiController
 
         if (order is null) return NotFound(new ApiResponse(404));
 
-        return Ok(order);
+        return Ok(_mapper.Map<OrderReturnDto>(order));
     }
 
     [HttpGet("deliveryMethods")]
