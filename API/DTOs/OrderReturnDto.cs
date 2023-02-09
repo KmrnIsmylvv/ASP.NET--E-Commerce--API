@@ -8,6 +8,7 @@ public class OrderReturnDto
 {
     public int Id { get; set; }
     public string BuyerEmail { get; set; }
+    public decimal ShippingPrice { get; set; }
     public DateTimeOffset OrderDate { get; set; } 
     public Address ShipToAddress { get; set; }
     public string DeliveryMethod { get; set; }

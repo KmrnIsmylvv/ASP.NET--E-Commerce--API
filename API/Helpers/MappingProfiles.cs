@@ -17,12 +17,22 @@ namespace API.Helpers
                     opt.MapFrom(src => src.ProductType.Name))
                 .ForMember(dest => dest.PictureUrl, opt =>
                     opt.MapFrom<ProductUrlResolver>());
+            CreateMap<Order, OrderReturnDto>()
+                .ForMember(dest => dest.DeliveryMethod, opt =>
+                    opt.MapFrom(src => src.DeliveryMethod.ShortName))
+                .ForMember(dest => dest.ShippingPrice, opt =>
+                    opt.MapFrom(src => src.DeliveryMethod.Price));
+            CreateMap<OrderItem, OrderItemDto>()
+                .ForMember(dest => dest.ProductId, opt =>
+                    opt.MapFrom(src => src.ItemOrdered.ProductItemId))
+                .ForMember(dest => dest.ProductName, opt =>
+                    opt.MapFrom(src => src.ItemOrdered.ProductName))
+                .ForMember(dest => dest.PictureUrl, opt =>
+                    opt.MapFrom(src => src.ItemOrdered.PictureUrl));
             CreateMap<Address, AddressDto>().ReverseMap();
             CreateMap<CustomerBasketDto, CustomerBasket>();
             CreateMap<BasketItemDto, BasketItem>();
             CreateMap<AddressDto, Core.Entities.OrderAggregate.Address>();
-            CreateMap<Order, OrderReturnDto>();
-            CreateMap<OrderItem, OrderItemDto>();
         }
     }
 }
