@@ -9,4 +9,4 @@
 
 ## Architecture && Pattern
 - N-Tier Architecture
-- Repository and Specification Pattern
+- Generic Repository, Specification and Unit of Work Design Patterns 
